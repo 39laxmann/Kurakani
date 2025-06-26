@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool isPasswordVisible = false;
+  bool _isPasswordVisible = false;
 
   final _passwordFocus = FocusNode();
   final _emailFocus = FocusNode();
@@ -93,19 +93,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 CustomTextField(
                   controller: passwordController,
                   hintText: "Password",
-                  obscureText: true,
+                  obscureText: !_isPasswordVisible,
                   validator: _validatePassword,
                   prefixIcon: Icon(Icons.lock_outline_sharp),
                   focusNode: _passwordFocus,
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
-                        isPasswordVisible = !isPasswordVisible;
-                        debugPrint("Visibility: $isPasswordVisible");
+                        _isPasswordVisible = !_isPasswordVisible;
+                        debugPrint("Visibility: $_isPasswordVisible");
                       });
                     },
                     icon: Icon(
-                      isPasswordVisible
+                      _isPasswordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
                     ),

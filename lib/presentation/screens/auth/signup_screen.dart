@@ -21,11 +21,11 @@ class _SignupScreenState extends State<SignupScreen> {
 
   final _nameFocus = FocusNode();
   final _userNameFocus = FocusNode();
-  final _emailFocus = FocusNode();
   final _phoneNumberFocus = FocusNode();
   final _passwordFocus = FocusNode();
+  final _emailFocus = FocusNode();
 
-  bool isPasswordVisible = false;
+  bool _isPasswordVisible = false;
 
   @override
   void dispose() {
@@ -91,6 +91,7 @@ class _SignupScreenState extends State<SignupScreen> {
     if (!phoneNoPattern.hasMatch(value)) {
       return "Please enter a valid phone number";
     }
+    return null;
   }
 
   @override
@@ -163,18 +164,18 @@ class _SignupScreenState extends State<SignupScreen> {
                 CustomTextField(
                   controller: passwordController,
                   hintText: "Password",
-                  obscureText: true,
+                  obscureText: !_isPasswordVisible,
                   prefixIcon: Icon(Icons.lock_outline_sharp),
                   validator: _validatePassword,
                   focusNode: _passwordFocus,
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
-                        isPasswordVisible = !isPasswordVisible;
+                        _isPasswordVisible = !_isPasswordVisible;
                       });
                     },
                     icon: Icon(
-                      isPasswordVisible
+                      _isPasswordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
                     ),
